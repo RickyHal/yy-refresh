@@ -1,10 +1,12 @@
 <template>
 	<div class="content">
 		<list class="list" :style="{ height: screenHeight, width: screenWidth }">
+			<!-- 下拉刷新 -->
 			<yy-refresh :refresh-text="refreshText" @refresh="refresh" ref="refreshStatus"></yy-refresh>
 			<cell v-for="(item, index) in testList" :key="index" class="list-item">
 				<text style="line-height: 30px;">{{ item }}</text>
 			</cell>
+			<!-- 上拉加载 -->
 			<yy-load-more :loading-text="loadingText" @loadMore="loadMore" ref="loadMoreStatus"></yy-load-more>
 		</list>
 	</div>
