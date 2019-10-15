@@ -3,7 +3,9 @@
 基于uni-app 的nvue上拉刷新和下拉加载插件 ，可以灵活控制刷新和加载的提示。
 ## 插件效果
 <img src="http://tva1.sinaimg.cn/large/007X8olVly1g7z737a64ag30hs0zk1ak.gif" width="300" />  
+
 ## 使用教程
+
 * 导入插件
 ```JavaScript
 //下拉刷新插件
@@ -11,6 +13,7 @@ import yyRefresh from '@/components/yy-refresh/yy-refresh.nvue';
 //上拉加载插件
 import yyLoadMore from '@/components/yy-refresh/yy-load-more.vue';
 ```
+
 * 声明插件
 ```JavaScript
     components: {
@@ -18,6 +21,7 @@ import yyLoadMore from '@/components/yy-refresh/yy-load-more.vue';
 		yyLoadMore
 	}
 ```
+
 * 使用插件
 ```Html
 <list class="list" :style="{ height: screenHeight, width: screenWidth }">
@@ -50,17 +54,22 @@ loadMore() {
 }
 ```
 ## 参数说明
+
 |参数|插件名|说明|是否必填|默认值|
 |--------|--------|--------|--------|--------|
 |refresh-text|yy-refresh|插件的下拉刷新提示文本数组，具体参考默认值|否|['下拉刷新', '释放更新', '刷新中...', '刷新成功']|
 |loading-text|yy-load-more|上拉加载提示文本数组，具体参考默认值|否|['加载更多', '松开加载', '加载中...', '加载完成']|
 |ref|yy-refresh，yy-load-more|必填属性，用于结束刷新和加载，其值可以自定义，但是在结束刷新或加载时必须使用this.$refs.\<ref>.finish(500);结束|是||
+
 ## 监听事件说明
+
 |事件|插件名|说明|
 |--------|--------|--------|
 |refresh|yy-refresh|下拉刷新事件|
 |loadMore|yy-load-more|上拉加载事件|
+
 ## 其它
+
 ```JavaScript
 that.$refs.loadMoreStatus.finish(500);
 ```
