@@ -2,8 +2,7 @@
 # yy-refresh
 基于uni-app 的nvue上拉刷新和下拉加载插件 ，可以灵活控制刷新和加载的提示。
 ## 插件效果
-<img src="http://tva1.sinaimg.cn/large/007X8olVly1g7z737a64ag30hs0zk1ak.gif
-"  width="300" />  
+<img src="RickyHal/yy-refresh/demo.gif"  width="300" />  
 ## 使用教程
 * 导入插件
 ```JavaScript
