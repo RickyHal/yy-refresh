@@ -1,0 +1,68 @@
+<template>
+	<div class="content">
+		<list class="list" :style="{ height: screenHeight, width: screenWidth }">
+			<yy-refresh :refresh-text="refreshText" @refresh="refresh" ref="refreshStatus"></yy-refresh>
+			<cell v-for="(item, index) in testList" :key="index" class="list-item">
+				<text style="line-height: 30px;">{{ item }}</text>
+			</cell>
+			<yy-load-more :loading-text="loadingText" @loadMore="loadMore" ref="loadMoreStatus"></yy-load-more>
+		</list>
+	</div>
+</template>
+
+<script>
+import yyRefresh from '@/components/yy-refresh/yy-refresh.nvue';
+import yyLoadMore from '@/components/yy-refresh/yy-load-more.vue';
+export default {
+	components: {
+		yyRefresh,
+		yyLoadMore
+	},
+	data() {
+		return {
+			screenHeight: 1080,
+			screenWidth: 750,
+			refreshText: ['下拉刷新', '释放更新', '刷新中...', '刷新成功'],
+			loadingText: ['加载更多', '松开加载', '加载中...', '加载完成'],
+			testList: ['1', '2', '3', '4', '5', '6']
+		};
+	},
+	onLoad() {
+		this.screenWidth = uni.getSystemInfoSync().windowWidth;
+		this.screenHeight = uni.getSystemInfoSync().windowHeight;
+	},
+	methods: {
+		refresh() {
+			var that = this;
+			//此处模拟请求数据 Here the request data is simulated
+			setTimeout(function() {
+				//结束刷新 stop refreshing
+				that.$refs.refreshStatus.finish(500);
+			}, 1000);
+		},
+		loadMore() {
+			var that = this;
+			//此处模拟请求数据  Here the request data is simulated
+			setTimeout(function() {
+				//结束加载  stop loading
+				that.$refs.loadMoreStatus.finish(500);
+			}, 1000);
+		}
+	}
+};
+</script>
+
+<style>
+.content {
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.list {
+	flex-direction: column;
+}
+.list-item {
+	align-items: center;
+	justify-content: center;
+}
+</style>
