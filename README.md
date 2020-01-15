@@ -4,8 +4,8 @@
 
 插件地址[https://ext.dcloud.net.cn/plugin?id=862](https://ext.dcloud.net.cn/plugin?id=862)
 ## 插件效果
-<img src="http://tva1.sinaimg.cn/large/007X8olVly1g7z737a64ag30hs0zk1ak.gif" width="300" />  
-<video src=" ">
+
+![lOfZRO.gif](https://s2.ax1x.com/2020/01/15/lOfZRO.gif)
 ## 使用教程
 
 * 导入插件
