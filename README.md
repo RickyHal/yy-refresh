@@ -4,8 +4,7 @@
 
 插件地址[https://ext.dcloud.net.cn/plugin?id=862](https://ext.dcloud.net.cn/plugin?id=862)
 ## 插件效果
-
-![lOfZRO.gif](https://s2.ax1x.com/2020/01/15/lOfZRO.gif)
+<a href="https://imgchr.com/i/lOfZRO"><img src="https://s2.ax1x.com/2020/01/15/lOfZRO.md.gif" alt="lOfZRO.gif" border="0" /></a>
 ## 使用教程
 
 * 导入插件
