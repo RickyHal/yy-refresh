@@ -2,69 +2,76 @@
 	<div class="content">
 		<list class="list" :style="{ height: screenHeight, width: screenWidth }">
 			<!-- 下拉刷新 -->
-			<yy-refresh :refresh-text="refreshText" @refresh="refresh" ref="refreshStatus"></yy-refresh>
-			<cell v-for="(item, index) in testList" :key="index" class="list-item">
+			<yy-refresh :refresh-text="refreshText" @refresh="onRefresh" ref="yyRefresh"></yy-refresh>
+			<cell v-for="(item, index) in testData" :key="index" class="list-item">
 				<text style="line-height: 30px;">{{ item }}</text>
 			</cell>
 			<!-- 上拉加载 -->
-			<yy-load-more :loading-text="loadingText" @loadMore="loadMore" ref="loadMoreStatus"></yy-load-more>
+			<yy-load-more :loading-text="loadMoreText" @loadMore="onLoadMore" ref="yyLoadMore"></yy-load-more>
 		</list>
 	</div>
 </template>
 
 <script>
-import yyRefresh from '@/components/yy-refresh/yy-refresh.nvue';
-import yyLoadMore from '@/components/yy-refresh/yy-load-more.vue';
-export default {
-	components: {
-		yyRefresh,
-		yyLoadMore
-	},
-	data() {
-		return {
-			screenHeight: 1080,
-			screenWidth: 750,
-			refreshText: ['下拉刷新', '释放更新', '刷新中...', '刷新成功'],
-			loadingText: ['加载更多', '松开加载', '加载中...', '加载完成'],
-			testList: ['1', '2', '3', '4', '5', '6']
-		};
-	},
-	onLoad() {
-		this.screenWidth = uni.getSystemInfoSync().windowWidth;
-		this.screenHeight = uni.getSystemInfoSync().windowHeight;
-	},
-	methods: {
-		refresh() {
-			var that = this;
-			//此处模拟请求数据 Here the request data is simulated
-			setTimeout(function() {
-				//结束刷新 stop refreshing
-				that.$refs.refreshStatus.finish(500);
-			}, 1000);
+	import yyRefresh from '@/components/yy-refresh/yy-refresh.nvue';
+	import yyLoadMore from '@/components/yy-refresh/yy-load-more.nvue';
+	export default {
+		components: {
+			yyRefresh,
+			yyLoadMore
 		},
-		loadMore() {
-			var that = this;
-			//此处模拟请求数据  Here the request data is simulated
-			setTimeout(function() {
-				//结束加载  stop loading
-				that.$refs.loadMoreStatus.finish(500);
-			}, 1000);
+		data() {
+			return {
+				screenHeight: 1080,
+				screenWidth: 750,
+				refreshText: ['下拉刷新', '释放更新', '刷新中...', '刷新成功'],
+				loadMoreText: ['','加载中...', '没有更多啦'],
+				testData: 20
+			};
+		},
+		onLoad() {
+			this.screenWidth = uni.getSystemInfoSync().windowWidth;
+			this.screenHeight = uni.getSystemInfoSync().windowHeight;
+		},
+		methods: {
+			onRefresh() {
+				//此处模拟请求数据 Here the request data is simulated
+				setTimeout(() => {
+					this.testData = 20
+					//结束刷新 stop refreshing
+					this.$refs.yyRefresh.finish();
+				}, 1000);
+			},
+			onLoadMore() {
+				//此处模拟请求数据  Here the request data is simulated
+				setTimeout(() => {
+					//结束加载  stop loading
+					if (this.testData > 20) {
+						this.$refs.yyLoadMore.finish(false);
+					} else {
+						//没有更多的数据了。。。
+						this.testData += 10
+						this.$refs.yyLoadMore.finish(true);
+					}
+				}, 1000);
+			}
 		}
-	}
-};
+	};
 </script>
 
 <style>
-.content {
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-.list {
-	flex-direction: column;
-}
-.list-item {
-	align-items: center;
-	justify-content: center;
-}
+	.content {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.list {
+		flex-direction: column;
+	}
+
+	.list-item {
+		align-items: center;
+		justify-content: center;
+	}
 </style>

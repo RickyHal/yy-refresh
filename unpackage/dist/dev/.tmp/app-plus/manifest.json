@@ -4,14 +4,14 @@
     "iPhone",
     "iPad"
   ],
-  "id": "",
+  "id": "__UNI__8C0EE8A",
   "name": "yy-refresh",
   "version": {
     "name": "1.0.0",
     "code": "100"
   },
   "description": "",
-  "launch_path": "__uniapptabbar.html",
+  "launch_path": "__uniappview.html",
   "developer": {
     "name": "",
     "email": "",
@@ -24,7 +24,7 @@
   },
   "plus": {
     "useragent": {
-      "value": "uni-app appservice",
+      "value": "uni-app",
       "concatenate": true
     },
     "splashscreen": {
@@ -35,7 +35,10 @@
     },
     "popGesture": "close",
     "launchwebview": {
-      "render": "always"
+      "render": "always",
+      "id": "2",
+      "kernel": "WKWebview",
+      "uni-app": "auto"
     },
     "statusbar": {
       "immersed": "supportedDevice",
@@ -50,6 +53,7 @@
       },
       "apple": {},
       "plugins": {
+        "ad": null,
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"
@@ -59,7 +63,7 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.3.3",
+      "compilerVersion": "2.5.5",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -67,5 +71,6 @@
         "flex-direction": "column"
       }
     }
-  }
+  },
+  "usingComponents": {}
 }
