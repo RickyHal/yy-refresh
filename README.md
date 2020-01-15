@@ -5,7 +5,7 @@
 插件地址[https://ext.dcloud.net.cn/plugin?id=862](https://ext.dcloud.net.cn/plugin?id=862)
 ## 插件效果
 <img src="http://tva1.sinaimg.cn/large/007X8olVly1g7z737a64ag30hs0zk1ak.gif" width="300" />  
-
+<video src=" ">
 ## 使用教程
 
 * 导入插件
@@ -27,32 +27,36 @@ import yyLoadMore from '@/components/yy-refresh/yy-load-more.vue';
 * 使用插件
 ```Html
 <list class="list" :style="{ height: screenHeight, width: screenWidth }">
-    <!-- 下拉刷新 -->
-    <yy-refresh :refresh-text="refreshText" @refresh="refresh" ref="refreshStatus"></yy-refresh>
-    <cell v-for="(item, index) in testList" :key="index" class="list-item">
-        <text style="line-height: 30px;">{{ item }}</text>
-    </cell>
-    <!-- 上拉加载 -->
-    <yy-load-more :loading-text="loadingText" @loadMore="loadMore" ref="loadMoreStatus"></yy-load-more>
+	<!-- 下拉刷新 -->
+	<yy-refresh :refresh-text="refreshText" @refresh="onRefresh" ref="yyRefresh"></yy-refresh>
+	<cell v-for="(item, index) in testData" :key="index" class="list-item">
+		<text style="line-height: 30px;">{{ item }}</text>
+	</cell>
+	<!-- 上拉加载 -->
+	<yy-load-more :loading-text="loadMoreText" @loadMore="onLoadMore" ref="yyLoadMore"></yy-load-more>
 </list>
 ```
 在调用插件的页面实现：
 ```JavaScript
-refresh() {
-    var that = this;
-    //此处模拟请求数据 Here the request data is simulated
-    setTimeout(function() {
-        //结束刷新 stop refreshing
-        that.$refs.refreshStatus.finish(500);
-    }, 1000);
+onRefresh() {
+	//此处模拟请求数据 Here the request data is simulated
+	setTimeout(() => {
+		this.testData = 20
+		//结束刷新 stop refreshing
+		this.$refs.yyRefresh.finish();
+	}, 1000);
 },
-loadMore() {
-    var that = this;
-    //此处模拟请求数据  Here the request data is simulated
-    setTimeout(function() {
-        //结束加载  stop loading
-        that.$refs.loadMoreStatus.finish(500);
-    }, 1000);
+onLoadMore() {
+	//此处模拟请求数据  Here the request data is simulated
+	setTimeout(() => {
+		//结束加载  stop loading
+		if (this.testData > 20) {
+			this.$refs.yyLoadMore.finish(false);
+		} else {
+			this.testData += 10
+			this.$refs.yyLoadMore.finish(true);
+		}
+	}, 1000);
 }
 ```
 ## 参数说明
@@ -60,21 +64,24 @@ loadMore() {
 |参数|插件名|说明|是否必填|默认值|
 |--------|--------|--------|--------|--------|
 |refresh-text|yy-refresh|插件的下拉刷新提示文本数组，具体参考默认值|否|['下拉刷新', '释放更新', '刷新中...', '刷新成功']|
-|loading-text|yy-load-more|上拉加载提示文本数组，具体参考默认值|否|['加载更多', '松开加载', '加载中...', '加载完成']|
+|loading-text|yy-load-more|上拉加载提示文本数组，具体参考默认值|否|['', '加载中...', '没有更多啦']|
 |ref|yy-refresh，yy-load-more|必填属性，用于结束刷新和加载，其值可以自定义，但是在结束刷新或加载时必须使用this.$refs.\<ref>.finish(500);结束|是||
 
 ## 监听事件说明
 
 |事件|插件名|说明|
 |--------|--------|--------|
-|refresh|yy-refresh|下拉刷新事件|
-|loadMore|yy-load-more|上拉加载事件|
+|onRefresh|yy-refresh|下拉刷新事件|
+|onLoadMore|yy-load-more|上拉加载事件|
 
 ## 其它
 
 ```JavaScript
-that.$refs.loadMoreStatus.finish(500);
+that.$refs.yyRefresh.finish(<Number>);
 ```
-其中的500为加载完成后显示结果的时间（单位为ms），即下拉刷新时显示刷新成功提示的时间，上拉加载显示加载完成的时间。
-
+其中的Number为加载完成后显示结果的时间（单位为ms），即上拉加载显示加载完成的时间。
+```JavaScript
+that.$refs.yyLoadMore.finish(<boolean>);
+```
+其中的Boolean为是否还有更多数据，默认为True
 如有BUG欢迎更正，github地址：[https://github.com/RickyHal/yy-refresh](https://github.com/RickyHal/yy-refresh)
